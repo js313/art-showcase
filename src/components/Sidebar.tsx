@@ -8,7 +8,7 @@ const Sidebar = () => {
     }`;
 
   return (
-    <div className="w-1/4 min-w-[200px] bg-gray-100 p-6 flex flex-col justify-between border-r border-gray-300">
+    <div className="p-6 flex flex-col justify-between min-h-full">
       <div>
         <h1 className="text-2xl font-bold mb-8">Your Name</h1>
         <nav className="space-y-4">
