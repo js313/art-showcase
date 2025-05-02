@@ -4,7 +4,7 @@ const Contact = () => {
       <h2 className="text-2xl font-semibold mb-4">
         Welcome to my art showcase!
       </h2>
-      <p>Gallery coming soon...</p>
+      <p>Contact coming soon...</p>
     </div>
   );
 };

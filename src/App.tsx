@@ -7,9 +7,8 @@ import About from "./pages/About";
 
 const App = () => {
   return (
-    <div className="flex h-full">
-      <h1 className="text-5xl text-pink-600">Tailwind is working?</h1>
-      <div className="w-1/4 min-w-[200px] h-full overflow-y-auto">
+    <div className="flex pl-5 pt-10 h-full bg-gray-100">
+      <div className="w-1/6 min-w-[200px] h-full overflow-y-auto">
         <Sidebar />
       </div>
       <main className="flex-1 h-full overflow-y-auto p-6">
