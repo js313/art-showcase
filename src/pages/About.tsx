@@ -6,7 +6,7 @@ const About = () => {
       </h2>
 
       {/* Full-width banner image */}
-      <div className="w-full p-6 mb-12">
+      <div className="w-full mb-12">
         <img
           src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,539,3966,2069,2280,880/0-0-0/308a4061-877f-43ba-9d20-955d35f5c3cb/1/2/SpacePicnic-Detail.jpg?fjkss=exp=2062208932~hmac=968c8d2680eab1f3027d42cf153afa93269311a2c51c04d55335220ae08bd61b"
           alt="Banner"
