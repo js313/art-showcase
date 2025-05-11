@@ -7,6 +7,7 @@ interface ImageModalProps {
 
 const ImageModal = ({ imageUrl, onClose }: ImageModalProps) => {
   useEffect(() => {
+    // Close on Esc press
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
