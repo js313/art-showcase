@@ -1,5 +1,3 @@
-// src/components/ImageModal.tsx
-
 import { useEffect } from "react";
 
 interface ImageModalProps {
@@ -23,7 +21,7 @@ const ImageModal = ({ imageUrl, onClose }: ImageModalProps) => {
     >
       {/* Close button in top-right of screen */}
       <button
-        className="fixed top-4 right-6 text-3xl font-bold text-white hover:text-gray-200 cursor-pointer z-50"
+        className="fixed top-2 right-4 text-3xl font-bold text-white hover:text-gray-200 cursor-pointer z-50"
         onClick={onClose}
         aria-label="Close"
       >
