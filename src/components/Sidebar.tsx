@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import FacebookIcon from "./FacebookIcon";
+import InstagramIcon from "./InstagramIcon";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -10,29 +12,50 @@ const Sidebar = () => {
   return (
     <div className="p-6 flex flex-col justify-between min-h-full">
       <div>
-        <h1 className="text-5xl font-bold mb-8 kumbh-sans-font text-red-300">Nidhi Sharma</h1>
-        <nav className="space-y-4">
-          <Link to="/" className={`${linkClass("/")} cutive-mono-font text-sm`}>
+        <h1 className="text-5xl font-bold mb-8 kumbh-sans-font text-red-300">
+          Nidhi Sharma
+        </h1>
+        <nav className="space-y-3">
+          <Link
+            to="/"
+            className={`${linkClass("/")} cutive-mono-font text-sm w-0`}
+          >
             Home
           </Link>
-          <Link to="/galleries" className={`${linkClass("/galleries")} cutive-mono-font text-sm`}>
+          <Link
+            to="/galleries"
+            className={`${linkClass(
+              "/galleries"
+            )} cutive-mono-font text-sm w-0`}
+          >
             Galleries
           </Link>
-          <Link to="/contact" className={`${linkClass("/contact")} cutive-mono-font text-sm`}>
-            Contact
-          </Link>
-          <Link to="/about" className={`${linkClass("/about")} cutive-mono-font text-sm`}>
+          <Link
+            to="/about"
+            className={`${linkClass("/about")} cutive-mono-font text-sm w-0`}
+          >
             About
+          </Link>
+          <Link
+            to="/contact"
+            className={`${linkClass("/contact")} cutive-mono-font text-sm w-0`}
+          >
+            Contact
           </Link>
         </nav>
       </div>
-      <div className="flex gap-4 mt-10">
-        <a href="#" target="_blank" rel="noreferrer">
-          Twitter
-        </a>
-        <a href="#" target="_blank" rel="noreferrer">
-          Instagram
-        </a>
+      <div className="mt-10">
+        <div className="flex gap-2">
+          <a href="https://facebook.com" target="_blank" rel="noreferrer">
+            <FacebookIcon className="w-4 h-4 hover:text-red-400 transition-colors" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            <InstagramIcon className="w-4 h-4 hover:text-red-400 transition-colors" />
+          </a>
+        </div>
+        <p className="text-xs text-gray-400 cutive-mono-font mt-2">
+          Follow me on social media!
+        </p>
       </div>
     </div>
   );

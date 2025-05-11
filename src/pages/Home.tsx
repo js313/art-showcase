@@ -1,10 +1,38 @@
+// src/pages/Home.tsx
+
+import { useEffect, useState } from "react";
+import { fetchGitHubImages } from "../api/getImages";
+
 const Home = () => {
+  const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const fetched = await fetchGitHubImages();
+      setImages(fetched);
+      setLoading(false);
+    };
+
+    loadImages();
+  }, []);
+
+  if (loading) return <p>Loading art...</p>; // TODO: change this to a loader
+
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">
-        Welcome to my art showcase!
-      </h2>
-      <p>Home coming soon...</p>
+    <div className="flex flex-wrap gap-8">
+      {images.map((url, index) => (
+        <img
+          key={index}
+          src={url}
+          alt={`Art ${index + 1}`}
+          loading="lazy"
+          className="h-50 object-contain cursor-pointer"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.display = "none"; // Do not render if cannot be loaded for any reason
+          }}
+        />
+      ))}
     </div>
   );
 };
