@@ -1,4 +1,23 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 const Contact = () => {
+  const [buttonText, setButtonText] = useState("Send Message");
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const success = searchParams.get("success");
+
+  useEffect(() => {
+    if (success === "true") {
+      setButtonText("Message Sent");
+      setTimeout(() => {
+        setButtonText("Send Message");
+        searchParams.delete("success");
+        setSearchParams(searchParams);
+      }, 1000);
+    }
+  }, [success, searchParams, setSearchParams]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full px-4 py-12">
       <h2 className="text-5xl text-gray-600 text-center mb-12 jetbrains-mono-font">
@@ -24,7 +43,7 @@ const Contact = () => {
             <input
               type="hidden"
               name="_next"
-              value="http://localhost:5173/contact?submitted=true"
+              value={`${window.location.origin}/contact?success=true`}
             ></input>
             <div>
               <input
@@ -58,9 +77,9 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="jetbrains-mono-p-font border border-gray-500 px-3 py-3 text-gray-500 hover:bg-gray-200 cursor-pointer"
+              className="jetbrains-mono-p-font border border-gray-500 px-3 py-3 text-gray-800 hover:bg-gray-200 cursor-pointer"
             >
-              Send Message
+              {buttonText}
             </button>
           </form>
         </div>
