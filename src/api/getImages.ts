@@ -1,5 +1,3 @@
-// src/utils/fetchGitHubImages.ts
-
 import { Album } from "../types/album";
 import { Category } from "../types/category";
 import { GitHubImage } from "../types/github-image";
@@ -106,7 +104,7 @@ const backupImageResponse: GitHubImage[] = [
 
 export const fetchGitHubImages = async (setData: SetData) => {
   const GITHUB_API_URL =
-    "https://api.github-disable-for-rate-limiting.com/repos/js313/project-images/git/trees/43b50b468f77a0e19d505c0319face6c4dc69a58/contents";
+    "https://api.github-disable-for-rate-limiting.com/repos/js313/art-showcase-images-test/contents";
 
   try {
     let data: GitHubImage[] = backupImageResponse;
@@ -117,7 +115,6 @@ export const fetchGitHubImages = async (setData: SetData) => {
       console.error(error);
       data = backupImageResponse;
     }
-    console.log(data);
 
     // Filter only image files
     const rawImages = data.filter((file) =>
@@ -179,12 +176,6 @@ export const fetchGitHubImages = async (setData: SetData) => {
     const categories = Array.from(categoriesMap.values());
 
     setData({
-      images,
-      albums,
-      categories,
-    });
-
-    console.log({
       images,
       albums,
       categories,
