@@ -1,48 +1,39 @@
-// src/pages/Home.tsx
-
-import { useEffect, useState } from "react";
-import { fetchGitHubImages } from "../api/getImages";
+import { useState } from "react";
 import ImageModal from "../components/ImageModal";
+import { useGallery } from "../hooks/useGallery";
 
 const Home = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { images, albums } = useGallery();
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadImages = async () => {
-      const fetched = await fetchGitHubImages();
-      setImages(fetched);
-      setLoading(false);
-    };
-
-    loadImages();
-  }, []);
-
-  if (loading) return <p>Loading art...</p>; // TODO: change to a loader
+  if (!images) return <p>Loading art...</p>; // TODO: change to a loader
 
   return (
     <>
       <div className="flex flex-wrap gap-8">
-        {images.map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            alt={`Art ${index + 1}`}
-            loading="lazy"
-            className="h-50 object-contain cursor-pointer transition-transform duration-200 hover:scale-105"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = "none";
-            }}
-            onClick={() => setSelectedImage(url)}
-          />
-        ))}
+        {albums.map(({ name, image_ids }, index) => {
+          const { url } = images[image_ids[0]];
+
+          return (
+            <img
+              key={name}
+              src={url}
+              alt={`Art ${index + 1}`}
+              loading="lazy"
+              className="h-50 object-contain cursor-pointer transition-transform duration-200 hover:scale-105"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+              onClick={() => setSelectedImageUrl(url)}
+            />
+          );
+        })}
       </div>
 
-      {selectedImage && (
+      {selectedImageUrl && (
         <ImageModal
-          imageUrl={selectedImage}
-          onClose={() => setSelectedImage(null)}
+          imageUrl={selectedImageUrl}
+          onClose={() => setSelectedImageUrl(null)}
         />
       )}
     </>

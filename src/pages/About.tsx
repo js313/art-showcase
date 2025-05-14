@@ -10,7 +10,7 @@ const About = () => {
         <img
           src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,539,3966,2069,2280,880/0-0-0/308a4061-877f-43ba-9d20-955d35f5c3cb/1/2/SpacePicnic-Detail.jpg?fjkss=exp=2062208932~hmac=968c8d2680eab1f3027d42cf153afa93269311a2c51c04d55335220ae08bd61b"
           alt="Banner"
-          className="w-full h-auto shadow-md"
+          className="w-full h-auto"
         />
       </div>
 
@@ -20,7 +20,7 @@ const About = () => {
           <img
             src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,111,1445,1917,1140,1424/0-0-0/7b638cb0-3de3-4a43-95bf-0bacfef6df36/1/2/IMG_6494.JPG.JPG?fjkss=exp=2062208932~hmac=4cf2a722ffecffff9cca890c2d10ec3016b7414c7a1374351239898abeded24d"
             alt="My Work"
-            className="w-full h-auto shadow-sm"
+            className="w-full h-auto"
           />
         </div>
         <div className="md:w-1/2">
@@ -58,7 +58,7 @@ const About = () => {
           <img
             src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,1235,1235,1140,1140/0-0-0/42c21247-8ed8-431f-9705-a51cc4b14e7b/1/2/20180917_101256_3-1.jpg?fjkss=exp=2062208932~hmac=4d8e03457374119df9400dfdf682c39af93604cf3fb070c547e56b5a45c53127"
             alt="Biography"
-            className="w-full h-auto shadow-sm"
+            className="w-full h-auto"
           />
         </div>
         <div className="md:w-1/2">

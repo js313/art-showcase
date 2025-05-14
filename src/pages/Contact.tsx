@@ -14,7 +14,7 @@ const Contact = () => {
         setButtonText("Send Message");
         searchParams.delete("success");
         setSearchParams(searchParams);
-      }, 1000);
+      }, 3000);
     }
   }, [success, searchParams, setSearchParams]);
 
