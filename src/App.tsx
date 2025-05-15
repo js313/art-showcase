@@ -1,9 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import Galleries from "./pages/Galleries";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import ImageViewer from "./components/ImageViewer";
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Route path="/galleries" element={<Galleries />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
+          <Route path="/image/:albumName" element={<ImageViewer />} />
+          <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </main>
     </div>

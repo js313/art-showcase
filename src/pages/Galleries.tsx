@@ -1,12 +1,12 @@
+import ImageList from "../components/ImageList";
+import { useGallery } from "../hooks/useGallery";
+
 const Galleries = () => {
-  return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">
-        Welcome to my art showcase!
-      </h2>
-      <p>Gallery coming soon...</p>
-    </div>
-  );
+  const { images, albums } = useGallery();
+
+  if (!images || !albums) return <p>Loading art...</p>; // TODO: change to a loader
+
+  return <ImageList albums={albums} images={images} />;
 };
 
 export default Galleries;

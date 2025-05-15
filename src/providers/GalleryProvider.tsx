@@ -12,8 +12,6 @@ export const GalleryProvider = ({ children }: { children: ReactNode }) => {
     fetchGitHubImages(setData);
   }, [data, setData]);
 
-  if (!data) return null; // optionally render loading fallback
-
   return (
     <GalleryContext.Provider value={data}>{children}</GalleryContext.Provider>
   );

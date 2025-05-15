@@ -184,7 +184,7 @@ export const fetchGitHubImages = async (setData: SetData) => {
     // Return list of raw URLs
     return rawImages.map((img) => img.download_url);
   } catch (error) {
-    console.error("Error fetching GitHub images:", error);
+    console.error("Error processing GitHub images:", error);
     setData({
       images: [
         {
