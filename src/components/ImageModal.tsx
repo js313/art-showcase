@@ -1,19 +1,51 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Image } from "../types/image";
 
 interface ImageModalProps {
-  imageUrl: string;
+  allImages: Image[];
+  albumImageIndexes: number[];
   onClose: () => void;
 }
 
-const ImageModal = ({ imageUrl, onClose }: ImageModalProps) => {
+const ImageModal = ({
+  allImages,
+  albumImageIndexes,
+  onClose,
+}: ImageModalProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % albumImageIndexes.length);
+  }, [albumImageIndexes.length]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + albumImageIndexes.length) % albumImageIndexes.length
+    );
+  }, [albumImageIndexes.length]);
+
   useEffect(() => {
-    // Close on Esc press
-    const handleEsc = (e: KeyboardEvent) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
     };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [handleNext, handlePrev, onClose]);
+
+  const currentImage = allImages[albumImageIndexes[currentIndex]];
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, width } = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - left;
+    if (clickX >= width / 2) {
+      handleNext();
+    } else {
+      handlePrev();
+    }
+  };
 
   return (
     <div
@@ -31,14 +63,40 @@ const ImageModal = ({ imageUrl, onClose }: ImageModalProps) => {
 
       <div
         className="relative bg-white rounded-lg max-w-3xl max-h-[90vh] overflow-auto p-4"
-        onClick={(e) => e.stopPropagation()} // don't close when clicking inside
+        onClick={(e) => {
+          e.stopPropagation(); // prevent modal from closing
+          handleClick(e); // detect left/right click
+        }}
       >
         <img
-          src={imageUrl}
+          src={currentImage.url}
           alt="Full size art"
-          className="max-h-[80vh] object-contain w-full"
+          className={`max-h-[80vh] object-contain w-full ${
+            hoveredSide === "left"
+              ? "cursor-w-resize"
+              : hoveredSide === "right"
+              ? "cursor-e-resize"
+              : "cursor-default"
+          }`}
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const half = rect.width / 2;
+
+            setHoveredSide(x < half ? "left" : "right");
+          }}
+          onMouseLeave={() => setHoveredSide(null)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick(e);
+          }}
         />
       </div>
+      <p className="text-white text-sm absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+        <button className="cursor-pointer">&larr;</button> {currentIndex + 1} /{" "}
+        {albumImageIndexes.length}{" "}
+        <button className="cursor-pointer">&rarr;</button>
+      </p>
     </div>
   );
 };

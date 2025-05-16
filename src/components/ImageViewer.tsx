@@ -3,6 +3,7 @@ import { useGallery } from "../hooks/useGallery";
 import ImageModal from "./ImageModal";
 import { Album } from "../types/album";
 import { Image } from "../types/image";
+import SkeletonLoader from "./SkeletonLoader";
 
 const ImageViewer = () => {
   const { albumName } = useParams();
@@ -13,9 +14,11 @@ const ImageViewer = () => {
     useGallery();
   const navigate = useNavigate();
 
-  if (!images || !albums) return <p>Loading art...</p>; // TODO: change to a loader
+  if (!images || !albums) return <SkeletonLoader count={12} />;
 
-  const selectedAlbum = albums.find((album: Album) => album.name === albumName);
+  const selectedAlbum = albums?.find(
+    (album: Album) => album.name === albumName
+  );
 
   if (!selectedAlbum) {
     navigate("/");
@@ -24,7 +27,8 @@ const ImageViewer = () => {
 
   return (
     <ImageModal
-      imageUrl={images[selectedAlbum.image_ids[0]].url}
+      allImages={images}
+      albumImageIndexes={selectedAlbum.image_ids}
       onClose={() => navigate("/")}
     />
   );
