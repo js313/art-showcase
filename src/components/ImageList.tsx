@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Album } from "../types/album";
 import { Image } from "../types/image";
 import SmartImage from "./SmartImage";
@@ -12,6 +12,7 @@ const ImageList = ({
   images: Image[];
 }) => {
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const location = useLocation();
 
   return (
     <div className="flex flex-wrap gap-8">
@@ -22,7 +23,11 @@ const ImageList = ({
         if (failedImages.has(url)) return null; // Don't render broken images
 
         return (
-          <Link to={`/image/${encodeURIComponent(name)}`} key={name}>
+          <Link
+            to={`/image/${encodeURIComponent(name)}`}
+            state={{ backgroundLocation: location }}
+            key={name}
+          >
             <SmartImage
               key={name}
               src={url}
