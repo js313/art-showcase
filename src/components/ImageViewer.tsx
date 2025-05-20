@@ -4,6 +4,7 @@ import ImageModal from "./ImageModal";
 import { Album } from "../types/album";
 import { Image } from "../types/image";
 import SkeletonLoader from "./SkeletonLoader";
+import Home from "../pages/Home";
 
 const ImageViewer = () => {
   const { albumName } = useParams();
@@ -26,11 +27,14 @@ const ImageViewer = () => {
   }
 
   return (
-    <ImageModal
-      allImages={images}
-      albumImageIndexes={selectedAlbum.image_ids}
-      onClose={() => navigate("/")}
-    />
+    <>
+      <Home />
+      <ImageModal
+        allImages={images}
+        albumImageIndexes={selectedAlbum.image_ids}
+        onClose={() => navigate("/")}
+      />
+    </>
   );
 };
 

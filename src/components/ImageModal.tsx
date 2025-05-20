@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Image } from "../types/image";
+import SmartImage from "./SmartImage";
 
 interface ImageModalProps {
   allImages: Image[];
@@ -15,14 +16,14 @@ const ImageModal = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
 
-  const handleNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % albumImageIndexes.length);
-  }, [albumImageIndexes.length]);
-
   const handlePrev = useCallback(() => {
     setCurrentIndex(
       (prev) => (prev - 1 + albumImageIndexes.length) % albumImageIndexes.length
     );
+  }, [albumImageIndexes.length]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % albumImageIndexes.length);
   }, [albumImageIndexes.length]);
 
   useEffect(() => {
@@ -68,7 +69,7 @@ const ImageModal = ({
           handleClick(e); // detect left/right click
         }}
       >
-        <img
+        <SmartImage
           src={currentImage.url}
           alt="Full size art"
           className={`max-h-[80vh] object-contain w-full ${
@@ -93,9 +94,25 @@ const ImageModal = ({
         />
       </div>
       <p className="text-white text-sm absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-        <button className="cursor-pointer">&larr;</button> {currentIndex + 1} /{" "}
-        {albumImageIndexes.length}{" "}
-        <button className="cursor-pointer">&rarr;</button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrev();
+          }}
+          className="cursor-pointer"
+        >
+          &larr;
+        </button>{" "}
+        {currentIndex + 1} / {albumImageIndexes.length}{" "}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
+          className="cursor-pointer"
+        >
+          &rarr;
+        </button>
       </p>
     </div>
   );
