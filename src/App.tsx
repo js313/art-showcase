@@ -5,6 +5,7 @@ import Galleries from "./pages/Galleries";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import ImageViewer from "./components/ImageViewer";
+import AlbumList from "./components/lists/AlbumList";
 
 const App = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const App = () => {
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<Home />} />
           <Route path="/galleries" element={<Galleries />} />
+          <Route path="/galleries/:categoryName" element={<AlbumList />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Navigate to={"/"} />} />

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { Album } from "../types/album";
-import { Image } from "../types/image";
-import SmartImage from "./SmartImage";
+import { Album } from "../../types/album";
+import { Image } from "../../types/image";
+import SmartImage from "../SmartImage";
 import { useState } from "react";
 
 const ImageList = ({

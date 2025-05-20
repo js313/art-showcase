@@ -6,7 +6,7 @@ import { Image } from "../types/image";
 type SetData = (data: {
   images: Image[];
   albums: Album[];
-  categories: Category[];
+  categories: Map<string, Category>;
 }) => void;
 
 const backupImageResponse: GitHubImage[] = [
@@ -76,7 +76,7 @@ const backupImageResponse: GitHubImage[] = [
       "https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,720,960,1600,960/0-0-0/5f21b176-5316-4286-ae38-6a16c9b244d4/1/1/SpacePicnic-BiodomeAction.jpg?fjkss=exp=2060518293~hmac=c17032c701e4b3763f83d00cadb9be6d431ba9abe7b6c3daa86c28354d1a576e",
   },
   {
-    name: "0014-worley_painting-paint_16.png",
+    name: "0014-modern_painting-paint_16.png",
     download_url:
       "https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,1445,2047,1600,2047/0-0-0/7b638cb0-3de3-4a43-95bf-0bacfef6df36/1/1/IMG_6494.JPG.JPG?fjkss=exp=2060518293~hmac=fc52bb992a18d62b8bdc3ed9d62fc5fcddf41bc09bfdf177cd490d88afe6fd80",
   },
@@ -86,12 +86,12 @@ const backupImageResponse: GitHubImage[] = [
       "https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,3456,2304,3456,1200/0-0-0/8e9d7d7c-5d60-454b-a40d-cc1de58fdd9b/1/1/IMG_6380.JPG.JPG?fjkss=exp=2060518293~hmac=df52b008970e54452f6126bff0a27bc3f786cc51441eaf852225649485da5a55",
   },
   {
-    name: "0016-worley_painting-paint_16.png",
+    name: "0016-modern_painting-paint_16.png",
     download_url:
       "https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,2428,3643,1600,3643/0-0-0/ddf5d1eb-d905-4f2e-8ba7-7d7792d655e4/1/1/2012.SlinkyGreen.AcrylicLatexPaint.36x40x27.JPG?fjkss=exp=2060518293~hmac=380d54c5cf849d1e2addaca8e09dd8e03514b63f83c627bef8baa273025cc28e",
   },
   {
-    name: "0017-worley_painting-paint_16.png",
+    name: "0017-modern_painting-paint_16.png",
     download_url:
       "https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,2703,3156,1600,3156/0-0-0/d4a57e5b-ab56-4eb5-9b36-8032af1e694c/1/1/P1050401_2.jpg?fjkss=exp=2060518293~hmac=e450c0b2b50fb085e1f6b115885d54e88aad44db67577bc630a4854e578c2fb5",
   },
@@ -117,65 +117,58 @@ export const fetchGitHubImages = async (setData: SetData) => {
         data = backupImageResponse;
       }
 
-      // Filter only image files
+      // Step 1: Filter images
       const rawImages = data.filter((file) =>
         /\.(jpe?g|png|gif|webp|bmp)$/i.test(file.name)
       );
 
-      // Sort by filename prefix (e.g., 0002_, 0001_)
-      rawImages.sort((a, b) =>
-        b.name.localeCompare(a.name, undefined, { numeric: true })
+      // Step 2: Parse + sort images by descending ID
+      const images: Image[] = rawImages
+        .map((file) => {
+          const [idStr, category_name, album_name] = file.name.split("-");
+          return {
+            id: Number(idStr),
+            category_name,
+            album_name,
+            url: file.download_url,
+          };
+        })
+        .sort((a, b) => b.id - a.id);
+
+      // Step 3: Group into albums
+      const albumsMap = new Map<string, Album>();
+      for (const [idx, image] of images.entries()) {
+        if (!albumsMap.has(image.album_name)) {
+          albumsMap.set(image.album_name, {
+            name: image.album_name,
+            category_name: image.category_name,
+            image_ids: [idx],
+          });
+        } else {
+          albumsMap.get(image.album_name)!.image_ids.push(idx);
+        }
+      }
+      // Sort image_ids inside albums (descending)
+      albumsMap.forEach((album) =>
+        album.image_ids.sort((a, b) => images[b].id - images[a].id)
       );
 
-      const images: Array<Image> = [];
-      // Map instead of Record to safely
-      const albumsMap = new Map<string, Album>();
-      const categoriesMap = new Map<string, Category>();
-
-      // Make sure `rawImages` is always sorted before this step
-      rawImages.forEach((rawImage, imageIdx) => {
-        const url = rawImage.download_url;
-        const [idStr, category_name, album_name] = rawImage.name.split("-");
-        const id = Number(idStr);
-
-        images.push({
-          id: Number(id),
-          album_name,
-          category_name,
-          url,
-        });
-
-        // Unnecessarily complex! Split all processing into seperate loops if bugs found
-        if (!albumsMap.has(album_name)) {
-          albumsMap.set(album_name, {
-            name: album_name,
-            category_name,
-            image_ids: [imageIdx],
-          });
-        } else {
-          albumsMap.get(album_name)!.image_ids.push(imageIdx);
-        }
-
-        const albumsMapLastIdx = albumsMap.size - 1;
-
-        if (!categoriesMap.has(category_name)) {
-          categoriesMap.set(category_name, {
-            name: category_name,
-            album_ids: [albumsMapLastIdx],
-          });
-        } else {
-          const category = categoriesMap.get(category_name);
-          if (
-            albumsMapLastIdx >
-            category!.album_ids[category!.album_ids.length - 1]
-          ) {
-            category!.album_ids.push(albumsMapLastIdx);
-          }
-        }
-      });
-
       const albums = Array.from(albumsMap.values());
-      const categories = Array.from(categoriesMap.values());
+
+      // Step 4: Group albums into categories
+      const categoriesMap = new Map<string, Category>();
+      for (const [idx, album] of albums.entries()) {
+        if (!categoriesMap.has(album.category_name)) {
+          categoriesMap.set(album.category_name, {
+            name: album.category_name,
+            album_ids: [idx],
+          });
+        } else {
+          categoriesMap.get(album.category_name)!.album_ids.push(idx);
+        }
+      }
+
+      const categories = categoriesMap;
 
       setData({
         images,
@@ -299,7 +292,7 @@ export const fetchGitHubImages = async (setData: SetData) => {
           },
         ],
         albums: [],
-        categories: [],
+        categories: new Map<string, Category>(),
       });
     }
   }, 2000);

@@ -1,4 +1,4 @@
-import ImageList from "../components/ImageList";
+import ImageList from "../components/lists/ImageList";
 import SkeletonLoader from "../components/SkeletonLoader";
 import { useGallery } from "../hooks/useGallery";
 

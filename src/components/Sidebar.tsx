@@ -1,13 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import FacebookIcon from "./FacebookIcon";
-import InstagramIcon from "./InstagramIcon";
+import FacebookIcon from "./icons/FacebookIcon";
+import InstagramIcon from "./icons/InstagramIcon";
 
 const Sidebar = () => {
   const location = useLocation();
-  const linkClass = (path: string) =>
-    `block text-lg hover:underline ${
-      location.pathname === path ? "underline text-red-400" : ""
+  const linkClass = (pathRegex: RegExp) => {
+    return `block text-lg hover:underline ${
+      pathRegex.test(location.pathname) ? "underline text-red-400" : ""
     }`;
+  };
 
   return (
     <div className="p-6 flex flex-col justify-between min-h-full">
@@ -18,27 +19,33 @@ const Sidebar = () => {
         <nav className="space-y-3">
           <Link
             to="/"
-            className={`${linkClass("/")} cutive-mono-font text-sm w-0`}
+            className={`${linkClass(
+              new RegExp("/$")
+            )} cutive-mono-font text-sm w-0`}
           >
             Home
           </Link>
           <Link
             to="/galleries"
             className={`${linkClass(
-              "/galleries"
+              new RegExp("/galleries/*")
             )} cutive-mono-font text-sm w-0`}
           >
             Galleries
           </Link>
           <Link
             to="/about"
-            className={`${linkClass("/about")} cutive-mono-font text-sm w-0`}
+            className={`${linkClass(
+              new RegExp("/about/*")
+            )} cutive-mono-font text-sm w-0`}
           >
             About
           </Link>
           <Link
             to="/contact"
-            className={`${linkClass("/contact")} cutive-mono-font text-sm w-0`}
+            className={`${linkClass(
+              new RegExp("/contact/*")
+            )} cutive-mono-font text-sm w-0`}
           >
             Contact
           </Link>
