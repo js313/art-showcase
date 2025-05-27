@@ -18,7 +18,7 @@ const CategoryList = ({
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   return (
-    <div className="flex flex-wrap gap-8">
+    <div className="flex flex-wrap md:gap-8 gap-2">
       {categories.map(({ name, album_ids }, index) => {
         const image_ids = albums[album_ids[0]].image_ids;
         const { url } = images[image_ids[0]];
@@ -30,7 +30,7 @@ const CategoryList = ({
           <Link
             to={`${encodeURIComponent(name)}`}
             key={name}
-            className="cursor-pointer"
+            className="cursor-pointer flex flex-col items-center"
             onMouseEnter={() => setIsHovering(name)}
             onMouseLeave={() => setIsHovering("")}
           >
@@ -39,7 +39,7 @@ const CategoryList = ({
               src={url}
               alt={`Art ${index + 1}`}
               loading="lazy"
-              className={`h-50 object-contain transition-transform duration-200 ${
+              className={`max-h-fit h-30 md:h-50 object-contain transition-transform duration-200 ${
                 isHovering === name ? "scale-105" : ""
               }`}
               onError={(e) => {
@@ -48,7 +48,7 @@ const CategoryList = ({
               }}
             />
             <p
-              className={`text-center cutive-mono-font mt-1 text-sm ${
+              className={`text-center cutive-mono-font mt-1 text-[11px] md:text-sm ${
                 isHovering === name ? "underline text-red-400" : ""
               }`}
             >

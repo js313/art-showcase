@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import HamburgerIcon from "./icons/HamburgerIcon";
 import CloseIcon from "./icons/CloseIcon";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Disable body scroll when sidebar is open
   useEffect(() => {
@@ -19,11 +22,23 @@ const MobileSidebar = () => {
     };
   }, [isOpen]);
 
+  // Close sidebar on navigation to a different page
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location, location.pathname]);
+
   return (
-    <>
+    <div className="md:hidden p-2 fixed h-15 w-full fixed flex items-center justify-between top-0 z-50 bg-white">
+      {/* Title */}
+      <p
+        className="md:hidden p-2 text-3xl font-bold kumbh-sans-font text-red-300"
+        onClick={() => navigate("/")}
+      >
+        Nidhi Sharma
+      </p>
       {/* Hamburger Button */}
       <button
-        className="md:hidden fixed top-4 right-4 z-50 p-2 text-gray-700"
+        className="md:hidden p-2 text-gray-700"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -46,7 +61,7 @@ const MobileSidebar = () => {
           onClick={() => setIsOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 

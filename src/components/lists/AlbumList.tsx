@@ -22,7 +22,7 @@ const AlbumList = () => {
   return (
     <>
       <div
-        className="flex mb-12 text-center text-5xl text-gray-600 jetbrains-mono-font justify-center-safe cursor-pointer"
+        className="flex mb-4 md:mb-12 text-center text-xl md:text-2xl md:text-5xl text-gray-600 jetbrains-mono-font justify-center-safe cursor-pointer"
         onClick={() => navigate("/galleries")}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -37,7 +37,12 @@ const AlbumList = () => {
         >
           &larr;
         </span>{" "}
-        <h2>{categoryName}</h2>
+        <h2>
+          {categoryName
+            .split("_")
+            .map((word) => word[0].toLocaleUpperCase() + word.substring(1))
+            .join(" ")}
+        </h2>
       </div>
       <ImageList albums={albumsToShow} images={images} />
     </>

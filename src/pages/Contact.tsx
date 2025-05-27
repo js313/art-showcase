@@ -19,8 +19,8 @@ const Contact = () => {
   }, [success, searchParams, setSearchParams]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full px-4 py-12">
-      <h2 className="text-5xl text-gray-600 text-center mb-12 jetbrains-mono-font">
+    <div className="flex flex-col items-center justify-center w-full px-4 py-2 md:py-12">
+      <h2 className="text-2xl md:text-5xl text-gray-600 text-center mb-4 md:mb-12 jetbrains-mono-font">
         Contact
       </h2>
 
