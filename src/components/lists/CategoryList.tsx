@@ -52,8 +52,7 @@ const CategoryList = ({
                 isHovering === name ? "underline text-red-400" : ""
               }`}
             >
-              {/* Remove extensions */}
-              {name.split(".")[0]}
+              {name}
             </p>
           </Link>
         );

@@ -105,7 +105,7 @@ const backupImageResponse: GitHubImage[] = [
 export const fetchGitHubImages = async (setData: SetData) => {
   setTimeout(async () => {
     const GITHUB_API_URL =
-      "https://api.github-disable-for-rate-limiting.com/repos/js313/art-showcase-images-test/contents";
+      "https://api.github.com/repos/js313/art-showcase-images-test/contents";
 
     try {
       let data: GitHubImage[] = backupImageResponse;
