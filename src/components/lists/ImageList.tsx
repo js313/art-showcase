@@ -33,7 +33,7 @@ const ImageList = ({
               src={url}
               alt={`Art ${index + 1}`}
               loading="lazy"
-              className="max-h-fit h-30 md:h-50 object-contain cursor-pointer transition-transform duration-200 hover:scale-105"
+              className="max-h-fit h-38 md:h-50 object-contain cursor-pointer transition-transform duration-200 hover:scale-105"
               onError={(e) => {
                 setFailedImages((prev) => new Set(prev).add(url));
                 (e.currentTarget as HTMLImageElement).style.display = "none";

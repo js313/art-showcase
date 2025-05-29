@@ -39,7 +39,7 @@ const CategoryList = ({
               src={url}
               alt={`Art ${index + 1}`}
               loading="lazy"
-              className={`max-h-fit h-30 md:h-50 object-contain transition-transform duration-200 ${
+              className={`max-h-fit h-38 md:h-50 object-contain transition-transform duration-200 ${
                 isHovering === name ? "scale-105" : ""
               }`}
               onError={(e) => {

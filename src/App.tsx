@@ -37,7 +37,7 @@ const App = () => {
           )}
         </main>
       </div>
-      <div className="md:hidden pt-16 px-4 overflow-y-auto">
+      <div className="md:hidden pt-16 pb-4 px-4 overflow-y-auto">
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<Home />} />
           <Route path="/galleries" element={<Galleries />} />
