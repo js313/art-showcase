@@ -6,19 +6,20 @@ const About = () => {
       </h2>
 
       {/* Full-width banner image */}
-      <div className="w-full mb-12 hidden md:block">
+      {/* Don't have one as of now!!! */}
+      {/* <div className="w-full mb-12 hidden md:block">
         <img
-          src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,539,3966,2069,2280,880/0-0-0/308a4061-877f-43ba-9d20-955d35f5c3cb/1/2/SpacePicnic-Detail.jpg?fjkss=exp=2062208932~hmac=968c8d2680eab1f3027d42cf153afa93269311a2c51c04d55335220ae08bd61b"
+          src="https://github.com/js313/art-showcase-images-test/blob/main/0027-mandala_art-art27.jpeg?raw=true"
           alt="Banner"
           className="w-full h-auto"
         />
-      </div>
+      </div> */}
 
       {/* Row 1: Image Left, Text Right */}
       <div className="flex flex-col md:flex-row gap-8 mb-16">
         <div className="md:w-1/2">
           <img
-            src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,111,1445,1917,1140,1424/0-0-0/7b638cb0-3de3-4a43-95bf-0bacfef6df36/1/2/IMG_6494.JPG.JPG?fjkss=exp=2062208932~hmac=4cf2a722ffecffff9cca890c2d10ec3016b7414c7a1374351239898abeded24d"
+            src="https://github.com/js313/art-showcase-images-test/blob/main/0025-mixed_media-art25.jpeg?raw=true"
             alt="My Work"
             className="w-full h-auto"
           />
@@ -28,26 +29,20 @@ const About = () => {
             My Work
           </h3>
           <p className="text-base leading-relaxed text-gray-600 jetbrains-mono-p-font">
-            I am in love with paint as a substance, in its viscous, muddy form
-            and its dry, flexible skin. I build with paint and with color; each
-            layer an event of slow germination fused to the one before it,
-            culminating into a self sustainable substance: a hide of seductive
-            skin-like plastic. The creatures borne from this process evoke in
-            the viewer the sense that they are encountering a strange but
-            familiar form of life- one that oscillates between corporeal body
-            and representation thereof. These imagined beings dance in and out
-            of the abject, finding buoyancy in a life defined by the constant
-            and inescapable force of gravity.
+            I work across many forms—painting, mandala art, decorated bottles,
+            and mixed media—often blending traditional Indian elements with
+            scenes from nature. I use oil and watercolor, homemade clay, and
+            repurposed materials to bring my ideas to life. Each piece is
+            created slowly, almost like meditation, where time disappears and
+            making becomes everything.
           </p>
           <p className="text-base leading-relaxed text-gray-600 jetbrains-mono-p-font mt-4">
-            The Accumulations series studies the carnal inner body, the meat and
-            organs of a paint organism through the cannibalizing and
-            reincarnation of older works. I compulsively collect the cast off
-            and detritus of older pieces, small experiments, and assemble them.
-            Shards of paint and silicone become tongues and valves; extrusions
-            of caulk and polyurethane become tubes and veins. These
-            accumulations document the moment where paint, image, and flatness
-            grow from two dimensions into fleshy form en masse.
+            Lately, I’ve enjoyed experimenting more—especially with recycled
+            cardboard to make my own clay—and turning everyday materials into
+            something lasting. Even though I don’t do this professionally,
+            people often assume I do. For me, this practice began out of
+            curiosity and has grown into something much deeper—a way of
+            reconnecting with myself and sharing what I love with others.
           </p>
         </div>
       </div>
@@ -56,7 +51,7 @@ const About = () => {
       <div className="flex flex-col md:flex-row-reverse gap-8">
         <div className="md:w-1/2">
           <img
-            src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/0,0,1235,1235,1140,1140/0-0-0/42c21247-8ed8-431f-9705-a51cc4b14e7b/1/2/20180917_101256_3-1.jpg?fjkss=exp=2062208932~hmac=4d8e03457374119df9400dfdf682c39af93604cf3fb070c547e56b5a45c53127"
+            src="https://github.com/js313/art-showcase-images-test/blob/main/0021-mandala_art-art21.jpeg?raw=true"
             alt="Biography"
             className="w-full h-auto"
           />
@@ -66,16 +61,21 @@ const About = () => {
             Biography
           </h3>
           <p className="text-base leading-relaxed text-gray-600 jetbrains-mono-p-font">
-            Andrea Lawl Manning is a Southeast CT based sculptor and
-            installation artist. She studied at the Glasgow School of Art and
-            holds a BFA from Pratt Institute. She’s exhibited in Brooklyn,
-            Manhattan, Glasgow, and more.
+            Nidhi Sharma is a self-taught artist based in India, whose creative
+            journey began in childhood and has quietly flourished in recent
+            years. With more time and curiosity to explore her lifelong
+            interest, she returned to art as a form of personal meditation and
+            joyful expression. What began as a way to pass time has since
+            deepened into something far more meaningful—a space where she can
+            lose herself completely.
           </p>
           <p className="text-base leading-relaxed text-gray-600 jetbrains-mono-p-font mt-4">
-            In her current body of work, Andrea plays with color, paint, paper,
-            plastics, and fiber to explore the ways we construct identity. She’s
-            dedicated to building communities through interactive installations
-            and creative programming.
+            Working primarily with oils, watercolors, clay, and mixed media,
+            Nidhi brings both skill and spontaneity to her handmade pieces. Her
+            work reflects a grounded, evolving practice rooted in tradition and
+            imagination. As she begins to share her art with a wider audience,
+            Nidhi hopes to connect, inspire, and perhaps even build a new path
+            forward—one painted, molded, and lovingly shaped by hand.
           </p>
         </div>
       </div>

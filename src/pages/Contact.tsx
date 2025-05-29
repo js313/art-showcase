@@ -28,16 +28,16 @@ const Contact = () => {
         {/* Image */}
         <div className="md:w-1/2 w-full">
           <img
-            src="https://format.creatorcdn.com/15b7c12c-4aad-4663-af2c-7bc5a826b2c2/0/0/0/328,0,3209,2304,1140,912/0-0-0/8e9d7d7c-5d60-454b-a40d-cc1de58fdd9b/1/2/IMG_6380.JPG.JPG?fjkss=exp=2061254710~hmac=414e054ed07950226465505f000305054972e047712821e522bad284a92468c6"
+            src="https://github.com/js313/art-showcase-images-test/blob/main/0011-2.5D-art11.jpeg?raw=true"
             alt="Contact Banner"
-            className="w-full rounded-lg object-cover"
+            className="w-full max-h-100 object-cover"
           />
         </div>
 
         {/* Form */}
         <div className="md:w-1/2 w-full">
           <form
-            action="https://formsubmit.co/sharmajeenit2000@gmail.com" // Replace email with the random string form submit provides
+            action="https://formsubmit.co/sharmanidhi0040@gmail.com" // Replace email with the random string form submit provides
             method="POST"
           >
             <input
