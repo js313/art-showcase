@@ -53,10 +53,18 @@ const Sidebar = () => {
       </div>
       <div className="mt-10">
         <div className="flex gap-2">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://facebook.com/share/16dS6sbdcW"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FacebookIcon className="w-4 h-4 hover:text-red-400 transition-colors" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://instagram.com/palette_passion_project"
+            target="_blank"
+            rel="noreferrer"
+          >
             <InstagramIcon className="w-4 h-4 hover:text-red-400 transition-colors" />
           </a>
         </div>
